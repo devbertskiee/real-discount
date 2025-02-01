@@ -248,13 +248,13 @@ export function Markdown(props: {
           children={md()}
         />
       </Show>
-      <Show when={!isString}>
+      {/* <Show when={!isString}>
         <EncodingSelect
           encoding={encoding()}
           setEncoding={setEncoding}
           referenceText={props.children}
         />
-      </Show>
+      </Show> */}
       <MarkdownToc disabled={!props.toc} markdownRef={markdownRef()!} />
     </Box>
   )

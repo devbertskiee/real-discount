@@ -26,7 +26,7 @@
     "s3": "S3",
     "ftp": "FTP"
   },
-  "title": "AList Manage",
+  "title": "Digital Library",
   "not_admin": "You are not admin user, please login with admin account.",
   "logout_success": "Logout successfully",
   "send": "Send",
