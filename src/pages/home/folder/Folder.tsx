@@ -76,16 +76,10 @@ const Folder = () => {
         <Match when={layout() === "list"}>
           <ListLayout />
         </Match>
-        <Match when={layout() === "grid"}>
-          <GridLayout />
-        </Match>
-        <Match when={layout() === "image"}>
-          <ImageLayout images={images()} />
-        </Match>
       </Switch>
       <Pager />
       <Search />
-      <ContextMenu />
+      {/* <ContextMenu /> */}
     </>
   )
 }

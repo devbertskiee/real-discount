@@ -21,6 +21,7 @@ import { useI18n } from "@solid-primitives/i18n"
 import { initialLang, langMap, loadedLangs } from "./i18n"
 import { Resp } from "~/types"
 import { setArchiveExtensions } from "~/store/archive"
+import Register from "~/pages/register"
 
 const Home = lazy(() => import("~/pages/home/Layout"))
 const Manage = lazy(() => import("~/pages/manage"))
@@ -90,6 +91,7 @@ const App: Component = () => {
           <Routes base={base_path}>
             <Route path="/@test" component={Test} />
             <Route path="/@login" component={Login} />
+            <Route path="/@register" component={Register} />
             <Route
               path="/@manage/*"
               element={

@@ -176,7 +176,7 @@ const ContextMenu = () => {
       >
         <ItemContent name="copy_link" />
       </Item>
-      <Item
+      {/* <Item
         hidden={() => {
           const index = UserPermissions.findIndex(
             (item) => item === "decompress",
@@ -191,7 +191,7 @@ const ContextMenu = () => {
         }}
       >
         <ItemContent name="extract" />
-      </Item>
+      </Item> */}
     </Menu>
   )
 }

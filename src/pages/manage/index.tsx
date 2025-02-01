@@ -1,16 +1,22 @@
 import { Box, Center, Flex, HStack, useColorModeValue } from "@hope-ui/solid"
 import { FullLoading, SwitchColorMode, SwitchLanguageWhite } from "~/components"
-import { useT, useTitle } from "~/hooks"
+import { useRouter, useT, useTitle } from "~/hooks"
 import { Header } from "./Header"
 import { SideMenu } from "./SideMenu"
 import { side_menu_items } from "./sidemenu_items"
 import { Route, Routes } from "@solidjs/router"
 import { For, Suspense } from "solid-js"
 import { routes } from "./routes"
+import { UserMethods } from "~/types"
+import { me } from "~/store"
 
 const Manage = () => {
   const t = useT()
+  const { to } = useRouter()
   useTitle(() => t("manage.title"))
+  if (UserMethods.is_general(me()) || UserMethods.is_guest(me())) {
+    return to("/")
+  }
   return (
     <Box
       css={{
@@ -30,12 +36,12 @@ const Manage = () => {
           overflowY="auto"
         >
           <SideMenu items={side_menu_items} />
-          <Center>
+          {/* <Center>
             <HStack spacing="$4" p="$2" color="$neutral11">
               <SwitchLanguageWhite />
               <SwitchColorMode />
             </HStack>
-          </Center>
+          </Center> */}
         </Box>
         <Box
           w={{

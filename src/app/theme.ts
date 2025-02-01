@@ -13,7 +13,7 @@ const theme: HopeThemeConfig = {
     Button: {
       baseStyle: {
         root: {
-          rounded: "$lg",
+          rounded: "$sm",
           _active: {
             transform: "scale(.95)",
             transition: "0.2s",
@@ -25,24 +25,24 @@ const theme: HopeThemeConfig = {
       },
       defaultProps: {
         root: {
-          colorScheme: "info",
+          colorScheme: "primary",
           variant: "subtle",
         },
       },
     },
     IconButton: {
       defaultProps: {
-        colorScheme: "info",
+        colorScheme: "primary",
         variant: "subtle",
       },
     },
     Input: {
       baseStyle: {
         input: {
-          rounded: "$lg",
+          rounded: "$sm",
           _focus: {
             boxShadow: "unset",
-            borderColor: "$info8",
+            borderColor: "$primary10",
           },
         },
       },
@@ -54,10 +54,10 @@ const theme: HopeThemeConfig = {
     },
     Textarea: {
       baseStyle: {
-        rounded: "$lg",
+        rounded: "$sm",
         _focus: {
           boxShadow: "unset",
-          borderColor: "$info8",
+          borderColor: "$primary10",
         },
         resize: "vertical",
         wordBreak: "break-all",
@@ -69,15 +69,15 @@ const theme: HopeThemeConfig = {
     Select: {
       baseStyle: {
         trigger: {
-          rounded: "$lg",
+          rounded: "$sm",
           _focus: {
             boxShadow: "unset",
-            borderColor: "$info8",
+            borderColor: "$primary10",
           },
         },
         content: {
           border: "none",
-          rounded: "$lg",
+          rounded: "$sm",
         },
         optionIndicator: {
           color: "$info10",
@@ -107,13 +107,13 @@ const theme: HopeThemeConfig = {
     Menu: {
       baseStyle: {
         content: {
-          rounded: "$md",
+          rounded: "$sm",
           minW: "unset",
           border: "unset",
           // py: "0",
         },
         item: {
-          rounded: "$md",
+          rounded: "$sm",
           py: "$1",
           // mx: "0",
         },
@@ -122,7 +122,7 @@ const theme: HopeThemeConfig = {
     Notification: {
       baseStyle: {
         root: {
-          rounded: "$lg",
+          rounded: "$sm",
           border: "unset",
         },
       },
@@ -130,13 +130,13 @@ const theme: HopeThemeConfig = {
     Alert: {
       baseStyle: {
         root: {
-          rounded: "$lg",
+          rounded: "$sm",
         },
       },
     },
     Anchor: {
       baseStyle: {
-        rounded: "$lg",
+        rounded: "$sm",
         px: "$1_5",
         py: "$1",
         _hover: {
@@ -152,7 +152,7 @@ const theme: HopeThemeConfig = {
     Modal: {
       baseStyle: {
         content: {
-          rounded: "$lg",
+          rounded: "$sm",
         },
       },
     },
@@ -165,7 +165,7 @@ export const globalStyles = globalCss({
     padding: 0,
   },
   html: {
-    fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" !important`,
+    fontFamily: "Inter, serif",
   },
   "#root": {
     display: "flex",

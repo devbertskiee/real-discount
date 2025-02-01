@@ -1,4 +1,6 @@
 import {
+  Button,
+  HStack,
   IconButton,
   Menu,
   MenuContent,
@@ -6,12 +8,20 @@ import {
   MenuTrigger,
 } from "@hope-ui/solid"
 import { changeColor } from "seemly"
+import { BiRegularLogInCircle } from "solid-icons/bi"
 import { BsGridFill, BsCardImage } from "solid-icons/bs"
 import { FaSolidListUl } from "solid-icons/fa"
-import { Switch, Match, For } from "solid-js"
+import { IoExit, IoSettings } from "solid-icons/io"
+import { For, Show } from "solid-js"
 import { Dynamic } from "solid-js/web"
-import { useT } from "~/hooks"
-import { getMainColor, LayoutType, layout, setLayout } from "~/store"
+import { useFetch, useRouter, useT } from "~/hooks"
+import { getMainColor, LayoutType, layout, setLayout, me } from "~/store"
+import { PResp, UserMethods } from "~/types"
+import { changeToken, handleResp, notify, r } from "~/utils"
+
+const [logOutReqLoading, logOutReq] = useFetch(
+  (): PResp<any> => r.get("/auth/logout"),
+)
 
 const layouts = {
   list: FaSolidListUl,
@@ -20,10 +30,18 @@ const layouts = {
 } as const
 
 export const Layout = () => {
+  const { to } = useRouter()
   const t = useT()
+  const logOut = async () => {
+    handleResp(await logOutReq(), () => {
+      changeToken()
+      notify.success(t("manage.logout_success"))
+      to(`/@login`)
+    })
+  }
   return (
     <Menu>
-      <MenuTrigger
+      {/* <MenuTrigger
         as={IconButton}
         color={getMainColor()}
         bgColor={changeColor(getMainColor(), { alpha: 0.15 })}
@@ -46,7 +64,51 @@ export const Layout = () => {
             </Match>
           </Switch>
         }
-      ></MenuTrigger>
+      ></MenuTrigger> */}
+      <HStack spacing="$1">
+        <Show when={UserMethods.is_admin(me())}>
+          <Button
+            loading={logOutReqLoading()}
+            onClick={() => {
+              to("/@manage")
+            }}
+            colorScheme="accent"
+            size="sm"
+          >
+            Admin
+          </Button>
+        </Show>
+        <Show when={UserMethods.is_general(me()) || UserMethods.is_admin(me())}>
+          <Button
+            loading={logOutReqLoading()}
+            onClick={logOut}
+            colorScheme="primary"
+            size="sm"
+          >
+            Logout
+          </Button>
+        </Show>
+        <Show when={UserMethods.is_guest(me())}>
+          <Button
+            onClick={() => {
+              to("/@login")
+            }}
+            colorScheme="primary"
+            size="sm"
+          >
+            Login
+          </Button>
+          <Button
+            onClick={() => {
+              to("/@register")
+            }}
+            colorScheme="success"
+            size="sm"
+          >
+            Register
+          </Button>
+        </Show>
+      </HStack>
       <MenuContent>
         <For each={Object.entries(layouts)}>
           {(item) => (
@@ -64,3 +126,6 @@ export const Layout = () => {
     </Menu>
   )
 }
+// function to(arg0: string) {
+//   throw new Error("Function not implemented.")
+// }

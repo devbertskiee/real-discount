@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Center,
   createDisclosure,
   Drawer,
@@ -34,7 +35,7 @@ const Header = () => {
     handleResp(await logOutReq(), () => {
       changeToken()
       notify.success(t("manage.logout_success"))
-      to(`/@login?redirect=${encodeURIComponent(location.pathname)}`)
+      to(`/@login`)
     })
   }
   return (
@@ -75,9 +76,10 @@ const Header = () => {
           <IconButton
             aria-label="logout"
             icon={<IoExit />}
+            fontSize="$xl"
             loading={logOutReqLoading()}
             onClick={logOut}
-            size="sm"
+            size="md"
           />
         </HStack>
       </Flex>

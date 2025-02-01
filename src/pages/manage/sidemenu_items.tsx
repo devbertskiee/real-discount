@@ -36,8 +36,15 @@ export const side_menu_items: SideMenuItem[] = [
     title: "manage.sidemenu.profile",
     icon: BsFingerprint,
     to: "/@manage",
-    role: UserRole.GUEST,
+    role: UserRole.ADMIN,
     component: lazy(() => import("./users/Profile")),
+  },
+  {
+    title: "manage.sidemenu.home",
+    icon: IoHome,
+    to: "/",
+    role: UserRole.ADMIN,
+    refresh: true,
   },
   {
     title: "manage.sidemenu.settings",
@@ -177,26 +184,5 @@ export const side_menu_items: SideMenuItem[] = [
     to: "/@manage/backup-restore",
     icon: FaSolidDatabase,
     component: lazy(() => import("./backup-restore")),
-  },
-  {
-    title: "manage.sidemenu.about",
-    icon: BsFront,
-    to: "/@manage/about",
-    role: UserRole.GUEST,
-    component: lazy(() => import("./About")),
-  },
-  {
-    title: "manage.sidemenu.docs",
-    icon: FaSolidBook,
-    to: "https://alist.nn.ci",
-    role: UserRole.GUEST,
-    external: true,
-  },
-  {
-    title: "manage.sidemenu.home",
-    icon: IoHome,
-    to: "/",
-    role: UserRole.GUEST,
-    refresh: true,
   },
 ]

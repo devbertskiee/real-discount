@@ -43,7 +43,8 @@ const Login = () => {
   const logo = useColorModeValue(logos[0], logos.pop())
   const t = useT()
   const title = createMemo(() => {
-    return `${t("login.login_to")} ${getSetting("site_title")}`
+    // return `${t("login.login_to")} ${getSetting("site_title")}`
+    return `${getSetting("site_title")}`
   })
   useTitle(title)
   const bgColor = useColorModeValue("white", "$neutral1")
@@ -116,7 +117,6 @@ const Login = () => {
       handleRespWithoutNotify(
         resp,
         (data) => {
-          notify.success(t("login.success"))
           changeToken(data.token)
           to(
             decodeURIComponent(searchParams.redirect || base_path || "/"),
@@ -124,11 +124,7 @@ const Login = () => {
           )
         },
         (msg, code) => {
-          if (!needOpt() && code === 402) {
-            setNeedOpt(true)
-          } else {
-            notify.error(msg)
-          }
+          notify.error(t("users.user_invalid"))
         },
       )
     } else {
@@ -176,7 +172,9 @@ const Login = () => {
   return (
     <Center zIndex="1" w="$full" h="100vh">
       <VStack
-        bgColor={bgColor()}
+        // borderWidth="thin"
+        // borderColor="$primary10"
+        backgroundColor="$blackAlpha10"
         rounded="$xl"
         p="24px"
         w={{
@@ -186,9 +184,14 @@ const Login = () => {
         spacing="$4"
       >
         <Flex alignItems="center" justifyContent="space-around">
-          <Image mr="$2" boxSize="$12" src={logo()} />
-          <Heading color="$info9" fontSize="$2xl">
-            {title()}
+          <Heading
+            color="$primary10"
+            backgroundColor="$primary1"
+            borderRadius="$sm"
+            fontSize="$lg"
+            p="$2"
+          >
+            {"Login to your Account".toUpperCase()}
           </Heading>
         </Flex>
         <Show
@@ -213,6 +216,7 @@ const Login = () => {
             placeholder={t("login.username-tips")}
             value={username()}
             onInput={(e) => setUsername(e.currentTarget.value)}
+            autocomplete="off"
           />
           <Show when={!useauthn()}>
             <Input
@@ -220,6 +224,7 @@ const Login = () => {
               placeholder={t("login.password-tips")}
               type="password"
               value={password()}
+              autocomplete="off"
               onInput={(e) => setPassword(e.currentTarget.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -228,7 +233,7 @@ const Login = () => {
               }}
             />
           </Show>
-          <Flex
+          {/* <Flex
             px="$1"
             w="$full"
             fontSize="$sm"
@@ -247,12 +252,15 @@ const Login = () => {
             <Text as="a" target="_blank" href={t("login.forget_url")}>
               {t("login.forget")}
             </Text>
-          </Flex>
+          </Flex> */}
         </Show>
         <HStack w="$full" spacing="$2">
+          <Button w="$full" loading={loading()} onClick={Login}>
+            {t("login.login")}
+          </Button>
           <Show when={!useauthn()}>
             <Button
-              colorScheme="primary"
+              colorScheme="warning"
               w="$full"
               onClick={() => {
                 if (needOpt()) {
@@ -266,9 +274,6 @@ const Login = () => {
               {t("login.clear")}
             </Button>
           </Show>
-          <Button w="$full" loading={loading()} onClick={Login}>
-            {t("login.login")}
-          </Button>
         </HStack>
         <Show when={ldapLoginEnabled}>
           <Checkbox
@@ -284,13 +289,10 @@ const Login = () => {
           colorScheme="accent"
           onClick={() => {
             changeToken()
-            to(
-              decodeURIComponent(searchParams.redirect || base_path || "/"),
-              true,
-            )
+            to("/")
           }}
         >
-          {t("login.use_guest")}
+          Back to Homepage
         </Button>
         <Flex
           mt="$2"
@@ -299,9 +301,9 @@ const Login = () => {
           color="$neutral10"
           w="$full"
         >
-          <SwitchLanguageWhite />
-          <SwitchColorMode />
-          <SSOLogin />
+          {/* <SwitchLanguageWhite /> */}
+          {/* <SwitchColorMode /> */}
+          {/* <SSOLogin /> */}
           <Show when={AuthnSignEnabled}>
             <Icon
               cursor="pointer"

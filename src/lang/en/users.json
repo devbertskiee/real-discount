@@ -20,6 +20,7 @@
   "base_path": "Base path",
   "role": "Role",
   "permission": "Permission",
+  "user_invalid": "Invalid username/password!",
   "disabled": "Disabled",
   "available": "Available",
   "update_profile": "Update Profile",

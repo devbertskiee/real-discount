@@ -104,17 +104,17 @@ const previews: Preview[] = [
     type: ObjType.VIDEO,
     component: lazy(() => import("./video360")),
   },
-  {
-    name: "Archive Preview",
-    exts: () => {
-      const index = UserPermissions.findIndex(
-        (item) => item === "read_archives",
-      )
-      if (!UserMethods.can(me(), index)) return []
-      return getArchiveExtensions()
-    },
-    component: lazy(() => import("./archive")),
-  },
+  // {
+  //   name: "Archive Preview",
+  //   exts: () => {
+  //     const index = UserPermissions.findIndex(
+  //       (item) => item === "read_archives",
+  //     )
+  //     if (!UserMethods.can(me(), index)) return []
+  //     return getArchiveExtensions()
+  //   },
+  //   component: lazy(() => import("./archive")),
+  // },
 ]
 
 export const getPreviews = (

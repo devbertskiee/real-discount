@@ -11,7 +11,7 @@ export const FileInfo = (props: { children: JSXElement }) => {
         boxSize="$20"
         fallback={
           <Icon
-            color={getMainColor()}
+            color="$primary10"
             boxSize="$20"
             as={getIconByObj(objStore.obj)}
           />
@@ -28,7 +28,7 @@ export const FileInfo = (props: { children: JSXElement }) => {
           {objStore.obj.name}
         </Heading>
         <Text color="$neutral10" size="sm">
-          {getFileSize(objStore.obj.size)} · {formatDate(objStore.obj.modified)}
+          File Size: {getFileSize(objStore.obj.size)}
         </Text>
       </VStack>
       <VStack spacing="$2">{props.children}</VStack>

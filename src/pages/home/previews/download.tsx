@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Button,
   HStack,
   IconButton,
@@ -10,12 +12,13 @@ import {
   PopoverTrigger,
 } from "@hope-ui/solid"
 import { useCopyLink, useT } from "~/hooks"
-import { objStore } from "~/store"
+import { me, objStore } from "~/store"
 import { FileInfo } from "./info"
 import { OpenWith } from "../file/open-with"
 import { createSignal, Show } from "solid-js"
 import { BsQrCode } from "solid-icons/bs"
 import QRCode from "qrcode"
+import { UserMethods } from "~/types"
 
 export const Download = (props: { openWith?: boolean }) => {
   const t = useT()
@@ -30,13 +33,22 @@ export const Download = (props: { openWith?: boolean }) => {
   return (
     <FileInfo>
       <HStack spacing="$2">
-        <Button colorScheme="accent" onClick={() => copyCurrentRawLink(true)}>
+        {/* <Button colorScheme="accent" onClick={() => copyCurrentRawLink(true)}>
           {t("home.toolbar.copy_link")}
-        </Button>
-        <Button as="a" href={objStore.raw_url} target="_blank">
-          {t("home.preview.download")}
-        </Button>
-        <Popover opened={pinned() || hover()} motionPreset="none">
+        </Button> */}
+        <Show when={UserMethods.is_general(me()) || UserMethods.is_admin(me())}>
+          <Button as="a" href={objStore.raw_url} target="_blank">
+            {t("home.preview.download")}
+          </Button>
+        </Show>
+        <Show when={UserMethods.is_guest(me())}>
+          <Alert status="warning">
+            <AlertIcon mr="$2_5" />
+            Opps! You're viewing as guest. Please contact administrator to
+            download.
+          </Alert>
+        </Show>
+        {/* <Popover opened={pinned() || hover()} motionPreset="none">
           <PopoverTrigger
             as={IconButton}
             icon={<BsQrCode />}
@@ -59,11 +71,11 @@ export const Download = (props: { openWith?: boolean }) => {
               />
             </PopoverBody>
           </PopoverContent>
-        </Popover>
+        </Popover> */}
       </HStack>
-      <Show when={props.openWith}>
+      {/* <Show when={props.openWith}>
         <OpenWith />
-      </Show>
+      </Show> */}
     </FileInfo>
   )
 }

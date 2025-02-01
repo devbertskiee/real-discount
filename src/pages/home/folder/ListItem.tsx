@@ -28,9 +28,9 @@ export interface Col {
 }
 
 export const cols: Col[] = [
-  { name: "name", textAlign: "left", w: { "@initial": "76%", "@md": "50%" } },
-  { name: "size", textAlign: "right", w: { "@initial": "24%", "@md": "17%" } },
-  { name: "modified", textAlign: "right", w: { "@initial": 0, "@md": "33%" } },
+  { name: "name", textAlign: "left", w: { "@initial": "76%", "@md": "76%" } },
+  { name: "size", textAlign: "right", w: { "@initial": "24%", "@md": "24%" } },
+  { name: "modified", textAlign: "right", w: { "@initial": 0, "@md": 0 } },
 ]
 
 export const ListItem = (props: { obj: StoreObj; index: number }) => {
@@ -118,7 +118,7 @@ export const ListItem = (props: { obj: StoreObj; index: number }) => {
           <Icon
             class="icon"
             boxSize="$6"
-            color={getMainColor()}
+            color="$primary10"
             as={getIconByObj(props.obj)}
             mr="$1"
             on:click={(e: MouseEvent) => {
@@ -133,11 +133,10 @@ export const ListItem = (props: { obj: StoreObj; index: number }) => {
             class="name"
             css={{
               wordBreak: "break-all",
-              whiteSpace: filenameStyle() === "multi_line" ? "unset" : "nowrap",
+              whiteSpace:
+                filenameStyle() === "multi_line" ? "nowrape" : "unset",
               "overflow-x":
                 filenameStyle() === "scrollable" ? "auto" : "hidden",
-              textOverflow:
-                filenameStyle() === "ellipsis" ? "ellipsis" : "unset",
               "scrollbar-width": "none", // firefox
               "&::-webkit-scrollbar": {
                 // webkit
@@ -154,7 +153,7 @@ export const ListItem = (props: { obj: StoreObj; index: number }) => {
         </Text>
         <Text
           class="modified"
-          display={{ "@initial": "none", "@md": "inline" }}
+          display={{ "@initial": "none" }}
           w={cols[2].w}
           textAlign={cols[2].textAlign as any}
         >

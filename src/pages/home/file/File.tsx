@@ -24,7 +24,7 @@ const File = () => {
             }}
             options={previews().map((item) => ({ value: item.name }))}
           />
-          <OpenWith />
+          {/* <OpenWith /> */}
         </HStack>
         <Suspense fallback={<FullLoading />}>
           <Dynamic component={cur().component} />
