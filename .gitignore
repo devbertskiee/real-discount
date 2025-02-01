@@ -4,3 +4,6 @@ dist
 !/src/lang/en/
 .DS_Store
 .idea
+
+.env.development
+.env.production
