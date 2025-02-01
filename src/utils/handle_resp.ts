@@ -3,7 +3,7 @@ import { bus, notify } from "."
 
 export const handleResp = <T>(
   resp: Resp<T>,
-  success?: (data: T, code: number) => void,
+  success?: (data: T) => void,
   fail?: (message: string, code: number) => void,
   auth: boolean = true,
   notify_error: boolean = true,
@@ -11,7 +11,7 @@ export const handleResp = <T>(
 ) => {
   if (resp.code === 200) {
     notify_success && notify.success(resp.message)
-    success?.(resp.data, resp.code)
+    success?.(resp.data)
   } else {
     const message =
       resp.code === 401 ? "User currently for approval!" : resp.message
@@ -29,7 +29,7 @@ export const handleResp = <T>(
 
 export const handleRespWithoutAuth = <T>(
   resp: Resp<T>,
-  success?: (data: T, code: number) => void,
+  success?: (data: T) => void,
   fail?: (message: string, code?: number) => void,
   notify_error: boolean = true,
 ) => {
@@ -38,7 +38,7 @@ export const handleRespWithoutAuth = <T>(
 
 export const handleRespWithoutNotify = <T>(
   resp: Resp<T>,
-  success?: (data: T, code: number) => void,
+  success?: (data: T) => void,
   fail?: (message: string, code?: number) => void,
   auth: boolean = true,
 ) => {
@@ -47,7 +47,7 @@ export const handleRespWithoutNotify = <T>(
 
 export const handleRespWithoutAuthAndNotify = <T>(
   resp: Resp<T>,
-  success?: (data: T, code: number) => void,
+  success?: (data: T) => void,
   fail?: (message: string, code?: number) => void,
 ) => {
   return handleResp(resp, success, fail, false, false)
@@ -55,7 +55,7 @@ export const handleRespWithoutAuthAndNotify = <T>(
 
 export const handleRespWithNotifySuccess = <T>(
   resp: Resp<T>,
-  success?: (data: T, code: number) => void,
+  success?: (data: T) => void,
   fail?: (message: string, code?: number) => void,
   auth: boolean = true,
   notify_error: boolean = true,
