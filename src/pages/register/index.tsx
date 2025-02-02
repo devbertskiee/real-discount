@@ -6,10 +6,20 @@ import {
   Button,
   HStack,
   VStack,
+  Alert,
+  AlertIcon,
+  Text,
 } from "@hope-ui/solid"
 import { createMemo, createSignal, Show } from "solid-js"
 import { useFetch, useT, useTitle, useRouter } from "~/hooks"
-import { changeToken, r, notify, handleResp, admin_token } from "~/utils"
+import {
+  changeToken,
+  r,
+  notify,
+  handleResp,
+  admin_token,
+  allowed_emails,
+} from "~/utils"
 import { PEmptyResp, User } from "~/types"
 import { createStore } from "solid-js/store"
 import LoginBg from "../login/LoginBg"
@@ -39,12 +49,18 @@ const Register = () => {
   })
 
   const Register = async () => {
+    const isValidEmail = allowed_emails.some((el) => user.username.endsWith(el))
     if (!useauthn()) {
-      const resp = await ok()
-      handleResp(resp, async () => {
-        notify.success(t("global.register_success"))
-        to("/@login")
-      })
+      if (!isValidEmail) {
+        notify.error(t("login.invalid"))
+        return
+      } else {
+        const resp = await ok()
+        handleResp(resp, async () => {
+          notify.success(t("global.register_success"))
+          to("/@login")
+        })
+      }
     }
   }
   return (
@@ -167,6 +183,10 @@ const Register = () => {
           {/* <SwitchLanguageWhite /> */}
           {/* <SwitchColorMode /> */}
           {/* <SSOLogin /> */}
+        </Flex>
+        <Flex justifyItems="center" alignItems="center" flexDirection="column">
+          <Text>Acceptable email for registration</Text>
+          <Text color="$success10">[ {allowed_emails.toString()} ]</Text>
         </Flex>
       </VStack>
       <LoginBg />

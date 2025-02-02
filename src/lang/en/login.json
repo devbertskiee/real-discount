@@ -1,9 +1,10 @@
 {
   "login_to": "Login to the",
-  "username-tips": "Input your username",
+  "username-tips": "Input your email",
   "password-tips": "Input your password",
   "otp-tips": "Input your OTP Code",
   "remember": "Remember me",
+  "invalid": "Invalid email / not allowed!",
   "forget": "Forget password?",
   "forget_url": "https://alist.nn.ci/faq/howto.html#how-to-get-password-if-i-forget-it",
   "clear": "Clear",

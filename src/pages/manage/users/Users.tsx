@@ -2,7 +2,11 @@ import {
   Badge,
   Box,
   Button,
+  FormControl,
+  FormLabel,
   HStack,
+  Input,
+  SimpleGrid,
   Table,
   Tbody,
   Td,
@@ -12,7 +16,7 @@ import {
   Tr,
   VStack,
 } from "@hope-ui/solid"
-import { createSignal, For } from "solid-js"
+import { createEffect, createMemo, createSignal, For } from "solid-js"
 import {
   useFetch,
   useListFetch,
@@ -30,6 +34,7 @@ import {
 } from "~/types"
 import { DeletePopover } from "../common/DeletePopover"
 import { Wether } from "~/components"
+import { createStore } from "solid-js/store"
 
 const Role = (props: { role: number }) => {
   const roles = [
@@ -71,11 +76,30 @@ const Users = () => {
   const [getUsersLoading, getUsers] = useFetch(
     (): PPageResp<User> => r.get("/admin/user/list"),
   )
-  const [users, setUsers] = createSignal<User[]>([])
+  const [users, setUsers] = createStore<User[]>([])
+  const [searchValue, setSearchValue] = createSignal("")
+
   const refresh = async () => {
     const resp = await getUsers()
     handleResp(resp, (data) => setUsers(data.content))
   }
+
+  const searchUser = (value: string) => {
+    if (!value) {
+      refresh()
+      return
+    }
+    const filteredUsersByEmail = users.filter((user) =>
+      user.username.includes(searchValue()),
+    )
+    if (filteredUsersByEmail.length != 0) {
+      setUsers(filteredUsersByEmail)
+    }
+  }
+
+  const initSearch = createMemo(() => searchUser(searchValue()), searchValue())
+
+  initSearch()
   refresh()
 
   const [deleting, deleteUser] = useListFetch(
@@ -101,6 +125,17 @@ const Users = () => {
         >
           {t("global.add")}
         </Button>
+        <SimpleGrid width={{ "@initial": "$md", "@lg": "$4xl" }} gap="$2">
+          <FormControl>
+            <Input
+              placeholder="Search User"
+              id="username"
+              value={searchValue()}
+              autocomplete="off"
+              onChange={(event) => setSearchValue(event.currentTarget.value)}
+            />
+          </FormControl>
+        </SimpleGrid>
       </HStack>
       <Box w="$full" overflowX="auto">
         <Table highlightOnHover dense>
@@ -121,7 +156,7 @@ const Users = () => {
             </Tr>
           </Thead>
           <Tbody>
-            <For each={users()}>
+            <For each={users}>
               {(user) => (
                 <Tr>
                   <Td>{user.username}</Td>
