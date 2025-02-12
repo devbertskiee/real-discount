@@ -211,7 +211,6 @@ export function Markdown(props: {
         )}`
       }
       const ans = `![${name}](${url})`
-      console.log(ans)
       return ans
     })
     return content
