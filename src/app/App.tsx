@@ -89,7 +89,7 @@ const App: Component = () => {
       <Switch
         fallback={
           <Routes base={base_path}>
-            <Route path="/@test" component={Test} />
+            {/* <Route path="/@test" component={Test} />
             <Route path="/@login" component={Login} />
             <Route path="/@register" component={Register} />
             <Route
@@ -99,7 +99,7 @@ const App: Component = () => {
                   <Manage />
                 </MustUser>
               }
-            />
+            /> */}
             <Route
               path="*"
               element={
