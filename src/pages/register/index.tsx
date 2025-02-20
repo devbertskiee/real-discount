@@ -133,14 +133,6 @@ const Register = () => {
             </Text>
           </Flex> */}
         <HStack w="$full" spacing="$2">
-          <Button
-            w="$full"
-            colorScheme="success"
-            loading={okLoading()}
-            onClick={Register}
-          >
-            Register
-          </Button>
           <Show when={!useauthn()}>
             <Button
               colorScheme="warning"
@@ -151,6 +143,14 @@ const Register = () => {
               }}
             >
               {t("login.clear")}
+            </Button>
+            <Button
+              w="$full"
+              colorScheme="success"
+              loading={okLoading()}
+              onClick={Register}
+            >
+              Register
             </Button>
           </Show>
         </HStack>

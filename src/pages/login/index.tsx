@@ -255,9 +255,6 @@ const Login = () => {
           </Flex> */}
         </Show>
         <HStack w="$full" spacing="$2">
-          <Button w="$full" loading={loading()} onClick={Login}>
-            {t("login.login")}
-          </Button>
           <Show when={!useauthn()}>
             <Button
               colorScheme="warning"
@@ -272,6 +269,9 @@ const Login = () => {
               }}
             >
               {t("login.clear")}
+            </Button>
+            <Button w="$full" loading={loading()} onClick={Login}>
+              {t("login.login")}
             </Button>
           </Show>
         </HStack>
