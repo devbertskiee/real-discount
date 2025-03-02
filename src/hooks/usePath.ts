@@ -78,7 +78,6 @@ export const setGlobalPage = (page: number) => {
   if (pagination.type === "pagination") {
     addOrUpdateQuery("page", page)
   }
-  console.log("setGlobalPage", globalPage)
 }
 export const resetGlobalPage = () => {
   setGlobalPage(1)

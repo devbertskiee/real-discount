@@ -165,7 +165,7 @@ export const globalStyles = globalCss({
     padding: 0,
   },
   html: {
-    fontFamily: "Inter, san-serif",
+    fontFamily: "Inter",
   },
   "#root": {
     display: "flex",

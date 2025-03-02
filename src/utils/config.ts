@@ -1,7 +1,6 @@
 // api and base_path both don't endsWith /
 export let admin_token = import.meta.env.VITE_ADMIN_TOKEN as string
 export let allowed_emails = ["@gmail.com", "@yahoo.com"]
-console.log(admin_token)
 export let base_path = ""
 export const setBasePath = (path: string) => {
   base_path = path

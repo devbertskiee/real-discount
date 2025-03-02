@@ -50,3 +50,7 @@
 .hope-select__option {
   flex-shrink: 0;
 }
+
+body {
+  font-family: "Inter", sans-serif !important;
+}
