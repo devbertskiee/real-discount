@@ -12,12 +12,18 @@ import {
   Flex,
   Heading,
   HStack,
+  Image,
   IconButton,
   useColorModeValue,
 } from "@hope-ui/solid"
+import svgLogo from "../../../images/logo_svg.svg"
 import { TiThMenu } from "solid-icons/ti"
 import { IoExit } from "solid-icons/io"
-import { SwitchColorMode, SwitchLanguageWhite } from "~/components"
+import {
+  CenterLoading,
+  SwitchColorMode,
+  SwitchLanguageWhite,
+} from "~/components"
 import { useFetch, useRouter, useT } from "~/hooks"
 import { SideMenu } from "./SideMenu"
 import { side_menu_items } from "./sidemenu_items"
@@ -61,16 +67,15 @@ const Header = () => {
             onClick={onOpen}
             size="sm"
           />
-          <Heading
-            fontSize="$xl"
-            color="$info9"
-            cursor="pointer"
-            onClick={() => {
-              to("/@manage")
-            }}
-          >
-            {t("manage.title")}
-          </Heading>
+          <HStack class="header-left" h="44px">
+            <Image
+              src={svgLogo}
+              h="$full"
+              w="auto"
+              fallback={<CenterLoading />}
+            />
+            {}
+          </HStack>
         </HStack>
         <HStack spacing="$1">
           <IconButton

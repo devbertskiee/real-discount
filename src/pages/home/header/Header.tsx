@@ -16,6 +16,7 @@ import { Container } from "../Container"
 import { bus } from "~/utils"
 import { Layout } from "./layout"
 import { isMac } from "~/utils/compatibility"
+import svgLogo from "../../../../images/logo_svg.svg"
 
 export const Header = () => {
   const logos = getSetting("logo").split("\n")
@@ -47,7 +48,7 @@ export const Header = () => {
         >
           <HStack class="header-left" h="44px">
             <Image
-              src={logo()!}
+              src={svgLogo}
               h="$full"
               w="auto"
               fallback={<CenterLoading />}
